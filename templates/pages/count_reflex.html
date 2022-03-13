@@ -1,0 +1,12 @@
+
+
+
+{% extends 'base.html' %}
+{% block content %}
+<h1>Count-Reflex page</h1>
+    <a  href="#"
+        data-controller="count_reflex"
+        data-action="click->count_reflex#increment"
+        data-count="{{ count }}"
+    >Increment </a><span>{{ count }}</span>
+{% endblock content %}

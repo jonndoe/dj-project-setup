@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Page Title</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Custom CSS for project,it was build with webpack -->
+<link href="{% static 'css/project.css' %}" rel="stylesheet">
+<link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+<style>
+body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+</style>
+<!-- Webpack build combination of all project .js files -->
+<script type="text/javascript" src="{% static 'app.js' %}"></script>
+
+</head>
+
+<body>
+<header>
+<a href="{% url 'home' %}">Home</a> | <a href="{% url 'about' %}">About</a> | <a href="{% url 'count' %}">CountReflex</a>
+</header>
+
+<h1>My Website</h1>
+<h4>Good site, ah?</h4>
+
+<div class="blue">Good day</div>
+
+<div class="container"> <p> Yes im container </p> </div>
+
+<p>A website created by me.</p>
+{% block content %}
+
+{% endblock content %}
+</body>
+</html>
