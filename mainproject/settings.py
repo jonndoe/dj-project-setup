@@ -13,9 +13,13 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+import dj_redis_url
+import environ
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+env = environ.Env()
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
@@ -77,13 +81,27 @@ ASGI_APPLICATION = "sockpuppet.routing.application"
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-
+"""
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.sqlite3",
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+"""
+DATABASES = {
+    "default": env.db("DATABASE_URL")
+}  # we use this settings here if we supply DATABASE_URL in enviroment variables
+
+
+# PostgreSQL
+# ------------------------------------------------------------------------------
+# DATABASE_URL= postgres://psqluser:strongpassword777@127.0.0.1:5432/someproject3
+# POSTGRES_HOST= 'postgres'
+# POSTGRES_PORT= '5432'
+# POSTGRES_DB= 'someproject3'
+# POSTGRES_USER= 'psqluser'
+# POSTGRES_PASSWORD= 'strongpassword777'
 
 
 # Password validation
@@ -123,7 +141,18 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 
-CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
+# CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            # "hosts": [('127.0.0.1', 6379)],
+            "hosts": [
+                (dj_redis_url.config()["HOST"], dj_redis_url.config()["PORT"])
+            ],  # With this settings we can read the REDIS_URL env from host.
+        },
+    },
+}
 
 STATIC_URL = "/static/"
 
@@ -137,7 +166,8 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "build"),  # All static files which were build by webpack
 )
 
-STATIC_ROOT = "collectedstatic"
+STATIC_ROOT = os.path.join(BASE_DIR, "collectedstatic/")
+# for production only, does not work with local dev server
 
 
 # Base url to serve media files
