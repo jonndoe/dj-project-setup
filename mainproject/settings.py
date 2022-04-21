@@ -138,3 +138,10 @@ STATICFILES_DIRS = (
 )
 
 STATIC_ROOT = "collectedstatic"
+
+
+# Base url to serve media files
+MEDIA_URL = "/media/"
+
+# Path to directory where media is stored
+MEDIA_ROOT = os.path.join(BASE_DIR, "media/")
