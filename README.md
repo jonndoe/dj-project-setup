@@ -1,4 +1,4 @@
-This is a setup-example project to train the process of set up of django project.
+This is a setup-example project to train the process of set up of django projects.
 
 
 To run this project:
