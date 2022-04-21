@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "pages.apps.PagesConfig",
+    "channels",
+    "sockpuppet",
 ]
 
 MIDDLEWARE = [
@@ -70,6 +72,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = "mainproject.wsgi.application"
+ASGI_APPLICATION = "sockpuppet.routing.application"
 
 
 # Database
@@ -119,6 +122,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+
+CHANNEL_LAYERS = {"default": {"BACKEND": "channels.layers.InMemoryChannelLayer"}}
+
 STATIC_URL = "/static/"
+
+STATICFILES_DIRS = (
+    # Put strings here, like "/home/html/static" or "C:/www/django/static".
+    # Always use forward slashes, even on Windows.
+    # Don't forget to use absolute paths, not relative paths.
+    os.path.join(
+        BASE_DIR, "static"
+    ),  # All static files of django project, which we do not want/required to build by webpack
+    os.path.join(BASE_DIR, "build"),  # All static files which were build by webpack
+)
 
 STATIC_ROOT = "collectedstatic"
