@@ -35,7 +35,7 @@ to run it:
  - run: export DATABASE_URL=postgres://psqluser:strongpassword777@127.0.0.1:5432/someproject3
  - run: python manage.py migrate
  - run: python manage.py collectstatic
- - run: daphne someproject2.asgi:application
+ - run: daphne mainproject.asgi:application
 
  -> should work now
  - TO DO: - Figure out media files handling in this configuration.

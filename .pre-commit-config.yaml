@@ -24,7 +24,7 @@ repos:
     rev: 3.9.2
     hooks:
       - id: flake8
-        args: ['--config=./setup.cfg', '--ignore=F401']  #some problem here, changes in setup.cfg somehow does not work in pre-commit...to be fixed
+        args: ['--config=./setup.cfg', '--ignore=F401 E402']  #some problem here, changes in setup.cfg somehow does not work in pre-commit...to be fixed
         additional_dependencies: [flake8-isort]
 
 
