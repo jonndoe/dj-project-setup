@@ -29,7 +29,7 @@ to run it:
    -> this will start up postgres and redis containers
 
  - open one more cmd shell
- - run: conda activate env38_python
+ - run: conda activate env38_python_complete
  - cd to project root
  - run: export REDIS_URL=redis://127.0.0.1:6379/0
  - run: export DATABASE_URL=postgres://psqluser:strongpassword777@127.0.0.1:5432/someproject3
