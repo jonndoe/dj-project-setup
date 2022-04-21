@@ -32,7 +32,7 @@ to run it:
  - run: conda activate env38_python
  - cd to project root
  - run: export REDIS_URL=redis://127.0.0.1:6379/0
- - run: export DATABASE_URL=postgres://psqluser:strongpassword777@127.0.0.1:5432/someproject2
+ - run: export DATABASE_URL=postgres://psqluser:strongpassword777@127.0.0.1:5432/someproject3
  - run: python manage.py migrate
  - run: python manage.py collectstatic
  - run: daphne someproject2.asgi:application
