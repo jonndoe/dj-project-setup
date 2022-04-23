@@ -1,0 +1,8 @@
+version: '3'
+
+
+services:
+  nginx:
+    network_mode: "host"
+    build: ./compose/local/nginx
+    container_name: nginx
