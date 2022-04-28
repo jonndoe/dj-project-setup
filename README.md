@@ -1,4 +1,5 @@
-This is a setup-example project to train the process of set up of django projects.
+This is a setup-example project to train the process of setting up of django projects.
+
 
 
 
@@ -8,32 +9,39 @@ This is a setup-example project to train the process of set up of django project
 To run this project:
 
 
-
 to run it:
 
 1. WITH LOCAL DJANGO-DEVELOPMENT SERVER:
 
-   NOTE: THIS IS DEVELOPMENT CONFIGURATION, MEANS WE USE DJANGO DEVELOPMENT SERVER AND
-         WE ONLY USE DOCKER FOR POSTGRES AND REDIS.
+   NOTE: THIS IS DEVELOPMENT CONFIGURATION, MEANS WE RUN DJANGO IN CONDA ENV AND USE DJANGO    DEVELOPMENT SERVER AND
+         WE ONLY USE DOCKER FOR POSTGRES - REDIS - NGINX.
 
- - open cmd shell
+ - open 1st cmd shell
  - run: conda activate env_nodejs
  - cd to project root
  - run: npm run build -> will build required javascript into /build/ folder
  - or run: npm run watch -> will build every time we changes the js files.(for development only)
 
- - open another cmd shell
+ - open 2nd cmd shell
  - cd to project root
  - run: sudo docker-compose -f docker-compose.dev.local.redis.postgres.yml up
    -> this will start up postgres and redis containers
 
- - open one more cmd shell
+ - open 3rd cmd shell
  - run: conda activate env38_python_complete
  - cd to project root
  - run: export REDIS_URL=redis://127.0.0.1:6379/0
  - run: export DATABASE_URL=postgres://psqluser:strongpassword777@127.0.0.1:5432/someproject2
  - run: python manage.py migrate
  - run: python manage.py runserver
+
+ - open 4th cmd shell
+ - cd to project root
+ - run: sudo docker-compose -f docker-compose.dev.local.nginx.yml up --build
+   --> this will build and run nginx container
+   !!! - Nginx container in this configuration uses the host network because it is proxying to another ports of Host Network.
+   When we make production setup it is better to set it using inside docker network for security reasons.
+
 
 
 
@@ -51,21 +59,21 @@ NOTE: THIS SET UP FOR PRODUCTION IS NOT COMPLETE!
                - DJANGO APP WORKING WITH DAPHNE IMAGE; ---> THIS IS NOT IMPLEMENTED WITH DOCKER
                - POSTGRES IMAGE;
                - REDIS IMAGE;
-               - NGINX OR TRAEFIK IMAGE;  ---> THIS IS STILL NOT IMPLEMENTED AT ALL
+               - NGINX IMAGE;
 
 
- - open cmd shell
+ - open 1st cmd shell
  - run: conda activate env_nodejs
  - cd to project root
  - run: npm run build -> will build required javascript into /build/ folder
  - or run: npm run watch -> will build every time we changes the js files.(for development only)
 
- - open another cmd shell
+ - open 2nd cmd shell
  - cd to project root
  - run: sudo docker-compose -f docker-compose.dev.local.redis.postgres.yml up
    -> this will start up postgres and redis containers
 
- - open one more cmd shell
+ - open 3rd cmd shell
  - run: conda activate env38_python_complete
  - cd to project root
  - run: export REDIS_URL=redis://127.0.0.1:6379/0
@@ -74,5 +82,9 @@ NOTE: THIS SET UP FOR PRODUCTION IS NOT COMPLETE!
  - run: python manage.py collectstatic
  - run: daphne mainproject.asgi:application
 
- -> should work now
- - TO DO: - Figure out media files handling in this configuration.(NGINX AND/OR TRAEFIK DOCKER IMAGES)
+ - open 4th cmd shell
+ - cd to project root
+ - run: sudo docker-compose -f docker-compose.dev.local.nginx.yml up --build
+   --> this will build and run nginx container
+   !!! - Nginx container in this configuration uses the host network because it is proxying to   another ports of Host Network.
+   When we make production setup it is better to set it using inside docker network for security reasons.
