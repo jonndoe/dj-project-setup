@@ -7,5 +7,5 @@ services:
     build: ./compose/local/nginx
     container_name: nginx
     volumes:
-      - ./media/:/usr/src/media/
-      - ./nginxlogs/:/var/log/nginx
+      - ./media/:/usr/media/
+      # - ./nginxlogs/:/var/log/nginx # incase we need errors and access logs saved on host
