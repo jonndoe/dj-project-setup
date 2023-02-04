@@ -1,11 +1,6 @@
 This is a setup-example project to train the process of setting up of django projects.
 
 
-
-
-
-
-
 To run this project:
 
 
@@ -31,7 +26,7 @@ to run it:
  - run: conda activate env38_python_complete
  - cd to project root
  - run: export REDIS_URL=redis://127.0.0.1:6379/0
- - run: export DATABASE_URL=postgres://psqluser:strongpassword777@127.0.0.1:5432/someproject2
+ - run: export DATABASE_URL=postgres://psqluser:strongpassword777@127.0.0.1:5432/someproject4     <- check what is someproject??? in .envs settings
  - run: python manage.py migrate
  - run: python manage.py runserver
 
@@ -42,7 +37,7 @@ to run it:
    !!! - Nginx container in this configuration uses the host network because it is proxying to another ports of Host Network.
    When we make production setup it is better to set it using inside docker network for security reasons.
 
-
+!!!! WHERE STATIC FILES ????
 
 
 
@@ -77,10 +72,19 @@ NOTE: THIS SET UP FOR PRODUCTION IS NOT COMPLETE!
  - run: conda activate env38_python_complete
  - cd to project root
  - run: export REDIS_URL=redis://127.0.0.1:6379/0
- - run: export DATABASE_URL=postgres://psqluser:strongpassword777@127.0.0.1:5432/someproject3
+ - run: export DATABASE_URL=postgres://psqluser:strongpassword777@127.0.0.1:5432/someproject3            <----!!!!CHECK THE DB NAME IN .env FILE!!!--->
  - run: python manage.py migrate
  - run: python manage.py collectstatic
  - run: daphne mainproject.asgi:application
+
+
+
+    Get the following error?
+    `django.db.utils.OperationalError: FATAL:  database "hello_django_dev" does not exist`
+    Run `docker-compose down -v` to remove the volumes along with the containers. Then, re-build the images, run the containers, and apply the migrations.
+
+
+
 
  - open 4th cmd shell
  - cd to project root
